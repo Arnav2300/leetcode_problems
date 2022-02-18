@@ -1,25 +1,20 @@
 /*
-Runtime: 4 ms, faster than 73.69% of C++ online submissions for Generate Parentheses.
-Memory Usage: 15.9 MB, less than 14.24% of C++ online submissions for Generate Parentheses.
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Generate Parentheses.
+Memory Usage: 14 MB, less than 29.80% of C++ online submissions for Generate Parentheses.
 */
 
 class Solution {
 public:
     vector<string>ans;
-    void generate(string s,int open,int close){
-        if(open==0&&close==0)
+    void generate(string s,int n,int open,int close,int i){
+        if(i==2*n)
             ans.push_back(s);
-        if(open>0){
-            s.push_back('(');
-            generate(s,open-1,close);
-            s.pop_back();
+        if(open<n){
+            //s.push_back('(');
+            generate(s+'(',n,open+1,close,i+1);
         }
-        if(close>0){
-            if(open<close){
-                s.push_back(')');
-                generate(s,open,close-1);
-                s.pop_back();
-            }
+        if(close<open){
+            generate(s+')',n,open,close+1,i+1);
         }
         
     }
@@ -27,7 +22,7 @@ public:
         ios_base::sync_with_stdio(0);
         cin.tie(0);
         string s="";
-        generate(s,n,n);
+        generate(s,n,0,0,0);
         return ans;
         
     }
