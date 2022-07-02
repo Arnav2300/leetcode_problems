@@ -6,7 +6,7 @@ public:
             return;
         }
         for(int i=index;i<nums.size();i++){
-            swap(nums[index],nums[i]);
+            swap(nums[i],nums[index]);
             f(index+1,ans,nums);
             swap(nums[index],nums[i]);
         }
