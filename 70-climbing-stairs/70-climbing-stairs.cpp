@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[46]={0};
+    //int dp[46]={0};
     int func(int n){
         int dp[n+1];
         dp[0]=1;dp[1]=1;
