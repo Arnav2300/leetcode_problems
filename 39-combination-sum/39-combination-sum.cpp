@@ -1,21 +1,28 @@
 class Solution {
 public:
-    void comb(int index,int target,vector<int>& candidates,vector<vector<int>>& ans,vector<int>& ds){
-        if(index==candidates.size()){
-            if(target==0)ans.push_back(ds);
+    void func(vector<int>arr, int target,vector<vector<int>>&ans,vector<int>&v,int pos){
+        if(pos==arr.size()&&target==0){
+            ans.push_back(v);
             return;
         }
-        if(candidates[index]<=target){
-            ds.push_back(candidates[index]);
-            comb(index,target-candidates[index],candidates,ans,ds);
-            ds.pop_back();
+        if(target==0){
+            ans.push_back(v);
+            return;
         }
-        comb(index+1,target,candidates,ans,ds);
+        if(pos==arr.size())
+            return;
+        if(arr[pos]<=target){
+            v.push_back(arr[pos]);
+            func(arr,target-arr[pos],ans,v,pos);
+            v.pop_back();
+        }
+        func(arr,target,ans,v,pos+1);
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        //int sum=0;
         vector<vector<int>>ans;
-        vector<int>ds;
-        comb(0,target,candidates,ans,ds);
+        vector<int>v;
+        func(candidates,target,ans,v,0);
         return ans;
     }
 };
